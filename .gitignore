@@ -1,0 +1,36 @@
+ 
+# Unity generated folders
+Library/
+Logs/
+Temp/
+Obj/
+Build/
+Builds/
+UserSettings/
+MemoryCaptures/
+
+# Visual Studio / JetBrains
+.vscode/
+*.csproj
+*.sln
+*.user
+*.suo
+*.unityproj
+*.pidb
+*.ide
+
+# Ignore dependencies
+Packages/
+
+# Ignore local settings
+ProjectSettings/EditorBuildSettings.asset
+UserSettings/
+.vsconfig
+
+# Ignore compiled files
+*.dll
+*.exe
+*.apk
+*.unitypackage
+.DS_Store
+
