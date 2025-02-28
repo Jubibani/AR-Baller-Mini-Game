@@ -1,0 +1,2 @@
+C:\Users\CJ\Desktop\LocalRepos\Unity\AR-Baller-Mini-Game\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\CJ\Desktop\LocalRepos\Unity\AR-Baller-Mini-Game\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
