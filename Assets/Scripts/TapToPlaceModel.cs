@@ -1,54 +1,38 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using System.Collections.Generic;
 
-public class TapToPlaceModel : MonoBehaviour
+public class TapToPlace : MonoBehaviour
 {
-    public GameObject testCubePrefab; // Assign a simple Cube prefab here
-    private GameObject spawnedTestCube;
+    public GameObject objectToSpawn; // Assign your 3D model in Inspector
 
-    public GameObject hoopPrefab; // Assign your basketball hoop prefab in the Inspector
-    private GameObject spawnedHoop;
     private ARRaycastManager arRaycastManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         arRaycastManager = GetComponent<ARRaycastManager>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0)
         {
-            Vector2 touchPosition = Input.GetTouch(0).position;
-            Debug.Log(" Touch detected at: " + touchPosition);
+            Touch touch = Input.GetTouch(0);
 
-            if (arRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
+            // If tap detected
+            if (touch.phase == TouchPhase.Began)
             {
-                Pose hitPose = hits[0].pose;
-                Debug.Log($" Surface detected at: {hitPose.position}");
+                // Perform a Raycast to detect planes
+                if (arRaycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
+                {
+                    Pose hitPose = hits[0].pose; // Get the hit position
 
-                if (spawnedTestCube == null)
-                {
-                    spawnedTestCube = Instantiate(testCubePrefab, hitPose.position, Quaternion.identity);
-                    Debug.Log(" Cube instantiated!");
+                    // Instantiate the object at the tap location
+                    Instantiate(objectToSpawn, hitPose.position, hitPose.rotation);
                 }
-                else
-                {
-                    spawnedTestCube.transform.position = hitPose.position;
-                    Debug.Log(" Cube moved!");
-                }
-            }
-            else
-            {
-                Debug.LogError(" No AR plane detected!");
             }
         }
     }
-
 }
